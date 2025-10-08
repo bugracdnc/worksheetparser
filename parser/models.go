@@ -41,7 +41,7 @@ func (question Questions) String() string {
 		optStr = "none"
 	}
 
-	return fmt.Sprintf("Type: %s\nQuestion: %v\nOptions: %v\nCorrect: %s\n\n", question.Type, question.Text, optStr, question.Correct)
+	return fmt.Sprintf(" - Type: %s\n   - Question: %v\n   - Options: %v\n   - Correct: %s\n\n", question.Type, question.Text, optStr, question.Correct)
 }
 
 type Worksheet struct {
@@ -53,9 +53,9 @@ type Worksheet struct {
 func (w Worksheet) String() string {
 	var strQuestions []string
 	for i, opt := range w.Questions {
-		strQuestions = append(strQuestions, fmt.Sprintf("%d) %v", i+1, opt))
+		strQuestions = append(strQuestions, fmt.Sprintf("%d)%v", i+1, opt))
 	}
-	str := fmt.Sprintf("title: %s\ninstructions: %s\nquestions:\n\n%v", w.Title, w.Instructions, strings.Join(strQuestions, "\n"))
+	str := fmt.Sprintf(" - Title: %s\n - Instructions: %s\n - Questions:\n\n%v", w.Title, w.Instructions, strings.Join(strQuestions, "\n"))
 
 	return str
 }
