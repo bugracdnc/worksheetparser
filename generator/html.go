@@ -11,7 +11,6 @@ import (
 
 func GenerateInteractive(worksheet parser.Worksheet, outPath string) error {
 	tmplPath := filepath.Join("templates", "interactive.html.tmpl")
-	fmt.Println("Loading template:", tmplPath)
 
 	tmpl, err := template.New("interactive.html.tmpl").Funcs(template.FuncMap{
 		"inc": func(i int) int { return i + 1 }}).
@@ -25,7 +24,6 @@ func GenerateInteractive(worksheet parser.Worksheet, outPath string) error {
 		return err
 	}
 	defer f.Close()
-	fmt.Printf("Title: %s\nQuestions: %d\n", worksheet.Title, len(worksheet.Questions))
 
 	err = tmpl.Execute(f, worksheet)
 	if err != nil {
