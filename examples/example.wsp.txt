@@ -3,17 +3,17 @@
 
 # Question 1
 @type: multiple_choice
-@question: He ___ to school every day.
+@question: He _________ to school every day.
 @options: go, goes, going
 @correct: B
 
 # Question 2
 @type: dropdown
-@question: She ___ (to be) very kind.
+@question: She _________ (to be) very kind.
 @options: is, are, am
 @correct: is
 
 # Question 3
 @type: fill_blank
-@question: They ___ playing football now.
+@question: They _________ playing football now.
 @correct: are
