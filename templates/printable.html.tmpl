@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{.Title}} (Printable)</title>
+<style>
+  body { font-family: "Times New Roman", serif; margin: 40px; }
+  h1 { text-align: center; }
+  p.instructions { text-align: center; font-style: italic; }
+  .question { margin-bottom: 20px; }
+  @media print {
+    body { font-size: 14pt; }
+  }
+</style>
+</head>
+<body>
+
+<h1>{{.Title}}</h1>
+<p class="instructions">{{.Instructions}}</p>
+
+<ol>
+{{range $i, $q := .Questions}}
+  <li class="question">
+    <p>{{$q.Text}}</p>
+
+    {{if eq $q.Type 2}}
+      <p>
+      {{range $j, $opt := $q.Options}}
+        {{printf "%c" (add $j 65)}}) {{$opt}}&nbsp;&nbsp;
+      {{end}}
+      </p>
+    {{end}}
+  </li>
+{{end}}
+</ol>
+
+</body>
+</html>
