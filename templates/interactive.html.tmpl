@@ -11,6 +11,18 @@
   input[type="text"], select { padding: 5px; margin-top: 5px; }
   button { margin-top: 10px; padding: 8px 15px; border: none; background: #4CAF50; color: white; border-radius: 5px; cursor: pointer; }
   button:hover { background: #45a049; }
+  /* radio option feedback */
+  label.option { display: inline-block; padding: 6px 8px; border-radius: 6px; margin: 4px 0; }
+  .correct { background: #c8e6c9; }        /* chosen & correct */
+  .incorrect { background: #ffcdd2; }      /* chosen & incorrect */
+  .correct-answer { outline: 2px solid #4CAF50; } /* highlight correct one */
+
+  /* fallback for non-radio inputs */
+  input[type="text"].correct, select.correct { background: #c8e6c9; }
+  input[type="text"].incorrect, select.incorrect { background: #ffcdd2; }
+
+  /* small accessibility / spacing */
+  .question .options { margin-top: 6px; }
 </style>
 </head>
 <body>
@@ -25,11 +37,11 @@
 
     {{if eq $q.Type 2}}
       {{range $j, $opt := $q.Options}}
-        <label><input type="radio" name="q{{$i}}" value="{{$opt}}"> {{$opt}}</label><br>
+        <label for="q{{$i}}"><input type="radio" id="q{{$i}}" name="q{{$i}}" value="{{$opt}}" data-correct="{{$q.Correct}}" />{{$opt}}</label><br>
       {{end}}
 
     {{else if eq $q.Type 1}}
-      <select name="q{{$i}}">
+      <select name="q{{$i}}" data-correct="{{$q.Correct}}">
         <option value="" selected disabled hidden>Choose your Answer</option>
         {{range $opt := $q.Options}}
           <option>{{$opt}}</option>
@@ -37,19 +49,137 @@
       </select>
 
     {{else if eq $q.Type 0}}
-      <input type="text" name="q{{$i}}">
+      <input type="text" name="q{{$i}}" data-correct="{{$q.Correct}}">
     {{end}}
   </div>
 {{end}}
 
 <button type="submit">Check Answers</button>
 </form>
+<!-- CSS: paste in <head> -->
+<style>
+  /* radio option feedback */
+  label.option { display: inline-block; padding: 6px 8px; border-radius: 6px; margin: 4px 0; }
+  label.option.correct { background: #c8e6c9; }        /* chosen & correct */
+  label.option.incorrect { background: #ffcdd2; }      /* chosen & incorrect */
+  label.option.correct-answer { outline: 2px solid #4CAF50; } /* highlight correct one */
 
+  /* fallback for non-radio inputs */
+  input[type="text"].correct, select.correct { background: #c8e6c9; }
+  input[type="text"].incorrect, select.incorrect { background: #ffcdd2; }
+
+  /* small accessibility / spacing */
+  .question .options { margin-top: 6px; }
+</style>
+
+<!-- JS: paste before </body> -->
 <script>
-  document.getElementById("worksheetForm").addEventListener("submit", function(e) {
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById("worksheetForm");
+  form.addEventListener("submit", function(e) {
     e.preventDefault();
-    alert("Answer checking coming soon!");
-  });
+
+    let score = 0;
+    const qDivs = document.querySelectorAll(".question");
+
+    // helper to normalize correct answer that might be "B" or actual option text
+    function resolveCorrectForRadios(rawCorrect, radios) {
+      if (!rawCorrect) return "";
+      // if single letter like A/B/C -> convert to option value by index
+      const letterMatch = /^[A-Za-z]$/.test(rawCorrect);
+      if (letterMatch) {
+        const idx = rawCorrect.toUpperCase().charCodeAt(0) - 65;
+        if (idx >= 0 && idx < radios.length) return radios[idx].value;
+      }
+      // if it's a number index like "1" treat as 0-based index
+      if (/^\d+$/.test(rawCorrect)) {
+        const idx = parseInt(rawCorrect, 10);
+        if (idx >= 0 && idx < radios.length) return radios[idx].value;
+      }
+      // otherwise assume it's the option text/value itself
+      return rawCorrect;
+    }
+
+    // reset all previous feedback classes
+    qDivs.forEach(qd => {
+      qd.querySelectorAll("label.option").forEach(l => {
+        l.classList.remove("correct", "incorrect", "correct-answer");
+      });
+      qd.querySelectorAll("input[type=text], select").forEach(el => {
+        el.classList.remove("correct", "incorrect");
+      });
+    });
+
+    qDivs.forEach(qDiv => {
+      // prefer data-correct on the question container; fallback to inputs/selects
+      let rawCorrect = qDiv.dataset.correct || "";
+      const radios = Array.from(qDiv.querySelectorAll('input[type="radio"]'));
+      const select = qDiv.querySelector('select');
+      const text = qDiv.querySelector('input[type="text"]');
+
+      if (radios.length > 0) {
+        // if no container-level correct provided, try any radio with data-correct
+        if (!rawCorrect) {
+          const found = radios.find(r => r.dataset.correct);
+          rawCorrect = found ? found.dataset.correct : "";
+        }
+
+        const correctValue = resolveCorrectForRadios(rawCorrect, radios);
+
+        const checked = qDiv.querySelector('input[type="radio"]:checked');
+
+        // mark correct option for learning (outline)
+        if (correctValue) {
+          const correctInput = radios.find(r => r.value === correctValue);
+          if (correctInput) {
+            const correctLabel = correctInput.closest('label');
+            if (correctLabel) correctLabel.classList.add('correct-answer');
+          }
+        }
+
+        if (checked) {
+          const chosenValue = checked.value;
+          const chosenLabel = checked.closest('label');
+
+          if (chosenValue === correctValue) {
+            if (chosenLabel) chosenLabel.classList.add('correct');
+            score++;
+          } else {
+            if (chosenLabel) chosenLabel.classList.add('incorrect');
+          }
+        } else {
+          // nothing chosen: optionally reveal correct answer only (done above)
+        }
+
+      } else if (select) {
+        // selects
+        // check dataset on select first, then check children
+        let corr = select.dataset.correct || rawCorrect || "";
+        const userVal = select.value;
+        if (userVal && corr) {
+          // normalize letter/index if necessary
+          if (/^[A-Za-z]$/.test(corr)) {
+            // try to map corr letter to option value
+            const options = Array.from(select.options).filter(o => o.value !== "");
+            const idx = corr.toUpperCase().charCodeAt(0) - 65;
+            if (idx >= 0 && idx < options.length) corr = options[idx].value;
+          }
+          if (userVal === corr) {
+            select.classList.add('correct'); score++;
+          } else select.classList.add('incorrect');
+        }
+      } else if (text) {
+        // text inputs
+        let corr = text.dataset.correct || rawCorrect || "";
+        const val = text.value.trim();
+        if (val && corr) {
+          if (val === corr) { text.classList.add('correct'); score++; }
+          else text.classList.add('incorrect');
+        }
+      }
+    });
+  }, false);
+});
 </script>
 
 </body>
