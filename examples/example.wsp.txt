@@ -1,19 +1,68 @@
-@title: Simple Present Tense Practice
-@instructions: Choose the correct verb form.
+@title: Present Simple Tense Practice
+@instructions: Choose the correct form of the verb in the Present Simple tense.
 
 # Question 1
+
 @type: multiple_choice
-@question: He _________ to school every day.
-@options: go, goes, going
-@correct: B
+@question: He _________ his homework after dinner.
+@options: do, does, doing
+@correct: does
 
 # Question 2
+
+@type: multiple_choice
+@question: They _________ to music in the evening.
+@options: listens, listening, listen
+@correct: listen
+
+# Question 3
+
+@type: multiple_choice
+@question: My brother _________ football on Sundays.
+@options: play, plays, playing
+@correct: plays
+
+# Question 4
+
 @type: dropdown
-@question: She _________ (to be) very kind.
+@question: I always _________ breakfast before school.
+@options: have, has, having
+@correct: have
+
+# Question 5
+
+@type: dropdown
+@question: She _________ (to be) a good student.
 @options: is, are, am
 @correct: is
 
-# Question 3
+# Question 6
+
+@type: dropdown
+@question: We _________ our grandparents every weekend.
+@options: visit, visits, visiting
+@correct: visit
+
+# Question 7
+
 @type: fill_blank
-@question: They _________ playing football now.
-@correct: are
+@question: He usually _________ his bike to school.
+@correct: rides
+
+# Question 8
+
+@type: fill_blank
+@question: The cat _________ on the sofa every afternoon.
+@correct: sleeps
+
+# Question 9
+
+@type: fill_blank
+@question: You _________ your hands before eating.
+@correct: wash
+
+# Question 10
+
+@type: fill_blank
+@question: My parents _________ in an office downtown.
+@correct: work
