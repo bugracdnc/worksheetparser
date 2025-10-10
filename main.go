@@ -34,13 +34,28 @@ func main() {
 
 	fmt.Println("Generating HTML worksheets...")
 
+	isInteractiveGenerated := true
 	if err := generator.GenerateInteractive(worksheet, interactiveOut); err != nil {
 		fmt.Println("Error generating interactive version: ", err)
+		isInteractiveGenerated = false
 	}
 
+	isPrintableGenerated := true
 	if err := generator.GeneratePrintable(worksheet, printableOut); err != nil {
 		fmt.Println("Error generating printable version: ", err)
+		isPrintableGenerated = false
 	}
 
-	fmt.Printf("Done generating files!\nCreated:\n - %s\n - %s\n", interactiveOut, printableOut)
+	if isInteractiveGenerated || isPrintableGenerated {
+		fmt.Println("Done generating files!\nCreated:")
+		if isInteractiveGenerated {
+			fmt.Println(" - ", interactiveOut)
+		}
+		if isPrintableGenerated {
+			fmt.Println(" - ", printableOut)
+		}
+	} else {
+		fmt.Println("Could not generate any files...")
+	}
+
 }
