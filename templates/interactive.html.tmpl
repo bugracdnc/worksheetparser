@@ -5,25 +5,126 @@
 <meta content="width=device-width,initial-scale=1.0" name="viewport"/>
 <title>{{.Title}}</title>
 <style>
-  body { font-family: Arial, sans-serif; margin: 40px; }
-  h1 { color: #333; }
-  .question { margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 10px; }
-  .question p { margin-bottom: 8px; }
-  input[type="text"], select { padding: 5px; margin-top: 5px; }
-  button { margin-top: 10px; padding: 8px 15px; border: none; background: #4CAF50; color: white; border-radius: 5px; cursor: pointer; }
-  button:hover { background: #45a049; }
-  /* radio option feedback */
-  label.option { display: inline-block; padding: 6px 8px; border-radius: 6px; margin: 4px 0; }
-  .correct { background: #c8e6c9; }        /* chosen & correct */
-  .incorrect { background: #ffcdd2; }      /* chosen & incorrect */
-  .correct-answer { outline: 2px solid #4CAF50; } /* highlight correct one */
+  :root {
+    --bg-color: #f0f4f8;
+    --card-bg: #ffffff;
+    --primary: #4F46E5; /* Indigo */
+    --success: #10B981; /* Emerald */
+    --error: #EF4444;   /* Red */
+    --text: #1F2937;
+  }
 
-  /* fallback for non-radio inputs */
-  input[type="text"].correct, select.correct { background: #c8e6c9; }
-  input[type="text"].incorrect, select.incorrect { background: #ffcdd2; }
+  body { 
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    background-color: var(--bg-color);
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-  /* small accessibility / spacing */
-  .question .options { margin-top: 6px; }
+  .container { max-width: 700px; width: 100%; }
+
+  h1 { text-align: center; color: #111827; }
+  p.desc { text-align: center; color: #6B7280; margin-bottom: 30px; }
+
+  /* Question Card */
+  .question-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+
+  .question-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  /* Custom Radio/Inputs */
+  label.option {
+    display: block;
+    padding: 12px 16px;
+    margin: 8px 0;
+    background: #f9fafb;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  label.option:hover { border-color: var(--primary); background: #eef2ff; }
+  
+  /* Hide actual radio button but keep accessibility */
+  input[type="radio"] { accent-color: var(--primary); transform: scale(1.2); margin-right: 10px; }
+
+  /* Feedback States */
+  label.option.correct { 
+    background-color: #d1fae5; 
+    border-color: var(--success); 
+    color: #065f46;
+  }
+  label.option.incorrect { 
+    background-color: #fee2e2; 
+    border-color: var(--error);
+    opacity: 0.7;
+  }
+  
+  /* The "Correct Answer" highlight (when user is wrong) */
+  label.option.correct-answer {
+    border: 2px dashed var(--success);
+    font-weight: bold;
+  }
+
+  /* Text Inputs */
+  input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+  input[type="text"]:focus, select:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+  input[type="text"].correct { border-color: var(--success); background: #d1fae5; }
+  input[type="text"].incorrect { border-color: var(--error); background: #fee2e2; }
+
+  /* Submit Button */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background-color: var(--primary);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(79, 70, 229, 0.4);
+    margin-top: 20px;
+  }
+  .submit-btn:hover { background-color: #4338ca; }
+
+  /* Score Banner (Hidden by default) */
+  #score-banner {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    text-align: center;
+    background: #111827;
+    color: white;
+    border-radius: 12px;
+    font-size: 1.2rem;
+  }
 </style>
 </head>
 <body>
