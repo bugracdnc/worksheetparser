@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }}</title>
+    <style>
+        :root {
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --primary: #4F46E5;
+            --primary-hover: #4338ca;
+            --success-bg: #d1fae5;
+            --success-border: #059669;
+            --error-bg: #fee2e2;
+            --error-border: #dc2626;
+            --text: #1f2937;
+        }
+
+        body { 
+            font-family: 'Segoe UI', system-ui, sans-serif; 
+            background-color: var(--bg-color);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            counter-reset: q-counter;
+        }
+
+        .container { max-width: 650px; margin: 0 auto; padding-bottom: 100px; }
+
+        h1 { text-align: center; color: #111; margin-bottom: 0.5rem; }
+        p.desc { text-align: center; color: #555; margin-bottom: 2rem; }
+
+        /* Question Card */
+        .question-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .q-text { font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem; }
+        .q-text::before {
+            counter-increment: q-counter;
+            content: counter(q-counter) ". ";
+            color: var(--primary);
+        }
+
+        /* Interactive Elements */
+        label.option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        label.option:hover { background: #f9fafb; }
+        input[type="radio"] { margin-right: 12px; transform: scale(1.2); accent-color: var(--primary); }
+
+        select, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box; 
+        }
+        select:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        /* Feedback States */
+        .question-card.correct { border-color: var(--success-border); background-color: #f0fdf4; }
+        .question-card.incorrect { border-color: var(--error-border); background-color: #fef2f2; }
+
+        .feedback-msg {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: none;
+        }
+        .correct .feedback-msg { display: block; color: var(--success-border); }
+        .incorrect .feedback-msg { display: block; color: var(--error-border); }
+
+        /* Floating Result Bar */
+        #result-bar {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: #1f2937;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
+            transform: translateY(100%);
+            transition: transform 0.3s ease-out;
+        }
+        #result-bar.visible { transform: translateY(0); }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn:hover { background: var(--primary-hover); }
+        .btn-reset { background: #4b5563; margin-left: 10px; width: auto; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>{{ .Title }}</h1>
+    <p class="desc">{{ .Instructions }}</p>
+
+    <form id="quiz-form">
+        {{ range $index, $q := .Questions }}
+        <div class="question-card" data-correct="{{ $q.CorrectAnswer }}" data-type="{{ $q.Type }}">
+            <div class="q-text">{{ $q.Text }}</div>
+
+            {{ if eq $q.Type "multiple_choice" }}
+                <div class="options-group">
+                    {{ range $q.Options }}
+                    <label class="option">
+                        <input type="radio" name="q-{{ $index }}" value="{{ . }}" />
+                        <span>{{ . }}</span>
+                    </label>
+                    {{ end }}
+                </div>
+            {{ else if eq $q.Type "dropdown" }}
+                <select name="q-{{ $index }}">
+                    <option value="" disabled selected>Select an answer...</option>
+                    {{ range $q.Options }}
+                    <option value="{{ . }}">{{ . }}</option>
+                    {{ end }}
+                </select>
+            {{ else }}
+                <input type="text" name="q-{{ $index }}" placeholder="Type your answer here..." autocomplete="off" />
+            {{ end }}
+            
+            <div class="feedback-msg"></div>
+        </div>
+        {{ end }}
+
+        <button type="submit" class="btn">Check Answers</button>
+    </form>
+</div>
+
+<div id="result-bar">
+    <div id="score-text">Score: 0/0</div>
+    <button class="btn btn-reset" onclick="location.reload()">Reset</button>
+</div>
+
+<script>
+document.getElementById('quiz-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    let score = 0;
+    const cards = document.querySelectorAll('.question-card');
+    
+    cards.forEach(card => {
+        const type = card.dataset.type;
+        const correct = card.dataset.correct.trim(); 
+        let userAnswer = "";
+        
+        if (type === 'multiple_choice') {
+            const checked = card.querySelector('input:checked');
+            if (checked) userAnswer = checked.value;
+        } else if (type === 'dropdown') {
+            userAnswer = card.querySelector('select').value;
+        } else {
+            const inputVal = card.querySelector('input');
+            if(inputVal) userAnswer = inputVal.value.trim();
+        }
+
+        const feedback = card.querySelector('.feedback-msg');
+        
+        if (userAnswer === correct) {
+            score++;
+            card.classList.add('correct');
+            card.classList.remove('incorrect');
+            feedback.textContent = "Correct!";
+        } else {
+            card.classList.add('incorrect');
+            card.classList.remove('correct');
+            feedback.textContent = "Incorrect. The answer is: " + correct;
+        }
+    });
+
+    const resultBar = document.getElementById('result-bar');
+    const scoreText = document.getElementById('score-text');
+    const percentage = Math.round((score / cards.length) * 100);
+    
+    // Fixed: Removed HTML tags from this string to appease the Go template engine
+    scoreText.textContent = "Result: " + score + "/" + cards.length + " (" + percentage + "%)";
+    
+    resultBar.classList.add('visible');
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+});
+</script>
+
+</body>
+</html>

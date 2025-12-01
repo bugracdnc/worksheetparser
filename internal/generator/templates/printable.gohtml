@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ .Title }} (Printable)</title>
+    <style>
+        /* The "Paper Simulator" CSS 
+           This makes the screen look like Acrobat Reader / Word Print View 
+        */
+        body {
+            background-color: #525659; /* Dark gray background like PDF viewers */
+            font-family: "Times New Roman", Times, serif;
+            margin: 0;
+            padding: 20px;
+            -webkit-print-color-adjust: exact;
+        }
+
+        /* The Sheet of Paper */
+        .page {
+            background-color: white;
+            width: 21cm; /* Standard A4 Width */
+            min-height: 29.7cm; /* Standard A4 Height */
+            margin: 0 auto;
+            padding: 2.5cm; /* Standard 1-inch margins */
+            box-sizing: border-box;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Drop shadow to lift paper off screen */
+            position: relative;
+        }
+
+        /* Header Section */
+        header {
+            border-bottom: 2px solid #000;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 18pt;
+            text-transform: uppercase;
+            margin: 0 0 10px 0;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 12pt;
+        }
+        
+        .field-line {
+            border-bottom: 1px solid black;
+            display: inline-block;
+            width: 150px;
+        }
+
+        p.instructions {
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        /* Questions */
+        .question-block {
+            margin-bottom: 20px;
+            page-break-inside: avoid; /* Don't cut questions in half when printing */
+        }
+
+        .question-text {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* Numbering logic via CSS */
+        body { counter-reset: q-counter; }
+        .question-text::before {
+            counter-increment: q-counter;
+            content: counter(q-counter) ". ";
+        }
+
+        /* Multiple Choice & Dropdown (List Style) */
+        .options-list {
+            list-style-type: none; /* No bullets, we use letters */
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+        
+        .options-list li {
+            margin-bottom: 5px;
+            font-size: 12pt;
+        }
+        
+        /* A) B) C) style numbering */
+        .options-list { counter-reset: opt-counter; }
+        .options-list li::before {
+            counter-increment: opt-counter;
+            content: counter(opt-counter, upper-alpha) ") "; /* A) B) C) */
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        /* Fill in the blank lines */
+        .blank-line {
+            display: inline-block;
+            border-bottom: 1px solid black;
+            width: 100px;
+            margin: 0 5px;
+        }
+
+        /* PRINT OVERRIDES 
+           When hitting Ctrl+P, remove the gray background and shadows
+        */
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+            .page {
+                width: 100%;
+                margin: 0;
+                padding: 0; /* Let the printer handle margins */
+                box-shadow: none;
+                border: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <header>
+            <div class="meta-info">
+                <div>Name: <span class="field-line" style="width: 200px;"></span></div>
+                <div>Date: <span class="field-line"></span></div>
+                <div>Score: <span class="field-line" style="width: 80px;"></span></div>
+            </div>
+            <br>
+            <h1>{{ .Title }}</h1>
+        </header>
+
+        <p class="instructions"><strong>Instructions:</strong> {{ .Instructions }}</p>
+
+        {{ range .Questions }}
+        <div class="question-block">
+            <div class="question-text">{{ .Text }}</div>
+
+            {{ if eq .Type "multiple_choice" }}
+                <ul class="options-list">
+                    {{ range .Options }}
+                    <li>{{ . }}</li>
+                    {{ end }}
+                </ul>
+
+            {{ else if eq .Type "dropdown" }}
+                <ul class="options-list">
+                    {{ range .Options }}
+                    <li>{{ . }}</li>
+                    {{ end }}
+                </ul>
+
+            {{ else }}
+                <div style="margin-top: 25px; border-bottom: 1px solid #ccc; width: 100%;"></div>
+            {{ end }}
+        </div>
+        {{ end }}
+    </div>
+
+</body>
+</html>
