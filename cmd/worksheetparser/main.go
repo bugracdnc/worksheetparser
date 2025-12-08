@@ -19,15 +19,15 @@ func main() {
 	}
 
 	inputPath := os.Args[1]
-	dir := filepath.Dir(inputPath)
+	dir, file := filepath.Split(inputPath)
 
 	worksheet, err := parser.Parse(inputPath)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	interactiveOut := filepath.Join(dir, "interactive.html")
-	printableOut := filepath.Join(dir, "printable.html")
+	interactiveOut := filepath.Join(dir, file+"_interactive.html")
+	printableOut := filepath.Join(dir, file+"_printable.html")
 
 	debug.LogPrintln("-------------------results-------------------")
 	debug.LogPrint(worksheet)
