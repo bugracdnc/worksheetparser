@@ -1,97 +1,124 @@
+// Package parser reads the .wsp.txt worksheet format:
+//
+//	@title: ...            worksheet title
+//	@instructions: ...     shown under the title
+//	@type: multiple_choice | dropdown | fill_blank
+//	@question: ...
+//	@options: a, b, c      (multiple_choice and dropdown)
+//	@correct: b            closes the question
+//
+// Lines starting with # are comments; blank lines are ignored.
 package parser
 
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"os"
+	"slices"
 	"strings"
 
-	"worksheetparser/debug"
-	"worksheetparser/internal/models"
+	"github.com/bugracdnc/worksheetparser/internal/models"
 )
 
-var worksheet = models.Worksheet{}
-var question = models.Questions{}
+var validTypes = []string{"multiple_choice", "dropdown", "fill_blank"}
 
-func indexOf(str string, char string) int {
-	for i, v := range str {
-		if string(v) == char {
-			return i
+// Parse reads a worksheet. It never fails on bad input: problems are
+// returned as human-readable warnings so a live editor can show them.
+func Parse(r io.Reader) (models.Worksheet, []string) {
+	var (
+		ws       models.Worksheet
+		q        models.Questions
+		warnings []string
+	)
+	warn := func(line int, format string, a ...any) {
+		warnings = append(warnings, fmt.Sprintf("line %d: ", line)+fmt.Sprintf(format, a...))
+	}
+	pending := func() bool { return q.Type != "" || q.Text != "" || len(q.Options) > 0 }
+	finish := func(line int) {
+		if q.Type == "" {
+			q.Type = "fill_blank"
 		}
-	}
-
-	return -1
-}
-
-func parseSetting(setting string, value string) {
-	switch setting {
-	case "title":
-		worksheet.Title = value
-	case "instructions":
-		worksheet.Instructions = value
-	case "type":
-		question.Type = value
-	case "question":
-		question.Text = value
-	case "options":
-		options := strings.Split(value, ",")
-		for i, opt := range options {
-			options[i] = strings.Trim(opt, " ")
+		if q.CorrectAnswer == "" {
+			warn(line, "question %d has no @correct", len(ws.Questions)+1)
+		} else if len(q.Options) > 0 && !slices.Contains(q.Options, q.CorrectAnswer) {
+			warn(line, "question %d: correct answer %q is not one of the options", len(ws.Questions)+1, q.CorrectAnswer)
 		}
-		question.Options = options
-	case "correct":
-		question.CorrectAnswer = strings.Trim(value, " ")
-		worksheet.Questions = append(worksheet.Questions, question)
-		question = models.Questions{}
+		ws.Questions = append(ws.Questions, q)
+		q = models.Questions{}
 	}
 
-}
-
-func parseLine(lineNo int, line string) {
-	if len(line) < 1 {
-		debug.LogPrintf("Empty line on %d -- skipped\n\n", lineNo)
-		return
-	}
-	switch line[0] {
-	case '#':
-		debug.LogPrintf("Comment on line %d -- skipped\n\n", lineNo)
-	case '@':
-		debug.LogPrintf("Found line with markdown... : '%s'\n", line)
-		setting := line[1:indexOf(line, ":")]
-		value := strings.Trim(line[indexOf(line, ":")+1:], " ")
-		debug.LogPrintf("setting: '%s'\nvalue: '%s'\n\n", setting, value)
-		parseSetting(setting, value)
-	default:
-		debug.LogPrintf("Invalid line on %d -- '%s' -- skipped\n\n", lineNo, line)
-		return
-	}
-}
-
-func Parse(filename string) (models.Worksheet, error) {
-	file, err := os.Open(filename)
-	if err != nil {
-		return models.Worksheet{}, err
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
+	scanner := bufio.NewScanner(r)
 	lineNo := 0
 	for scanner.Scan() {
 		lineNo++
-		line := scanner.Text()
-		parseLine(lineNo, line)
+		line := strings.TrimSpace(scanner.Text())
+		if line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
+		key, value, ok := strings.Cut(line, ":")
+		if !strings.HasPrefix(line, "@") || !ok {
+			warn(lineNo, "expected '@key: value', got %q", line)
+			continue
+		}
+		key = strings.ToLower(strings.TrimSpace(key[1:]))
+		value = strings.TrimSpace(value)
 
+		switch key {
+		case "title":
+			ws.Title = value
+		case "instructions":
+			ws.Instructions = value
+		case "type", "question":
+			// A new question started before the previous one got its @correct.
+			if (key == "type" && pending()) || (key == "question" && q.Text != "") {
+				finish(lineNo)
+			}
+			if key == "question" {
+				q.Text = value
+				break
+			}
+			if !slices.Contains(validTypes, value) {
+				warn(lineNo, "unknown type %q (use %s)", value, strings.Join(validTypes, ", "))
+			}
+			q.Type = value
+		case "options":
+			q.Options = nil
+			for _, opt := range strings.Split(value, ",") {
+				if opt = strings.TrimSpace(opt); opt != "" {
+					q.Options = append(q.Options, opt)
+				}
+			}
+		case "correct":
+			q.CorrectAnswer = value
+			finish(lineNo)
+		default:
+			warn(lineNo, "unknown key @%s", key)
+		}
+	}
+	if pending() {
+		finish(lineNo)
 	}
 
-	if worksheet.Title == "" {
-		fmt.Println(" ! Warning: parameter missing -- title")
+	if ws.Title == "" {
+		warnings = append(warnings, "missing @title")
 	}
-	if worksheet.Instructions == "" {
-		fmt.Println(" ! Warning: parameter missing -- instructions")
+	if ws.Instructions == "" {
+		warnings = append(warnings, "missing @instructions")
 	}
-	if len(worksheet.Questions) < 1 {
-		fmt.Println(" ! Warning: parameter missing -- questions")
+	if len(ws.Questions) == 0 {
+		warnings = append(warnings, "no questions found")
 	}
+	return ws, warnings
+}
 
-	return worksheet, nil
+// ParseFile is Parse for a file on disk.
+func ParseFile(path string) (models.Worksheet, []string, error) {
+	f, err := os.Open(path)
+	if err != nil {
+		return models.Worksheet{}, nil, err
+	}
+	defer f.Close()
+	ws, warnings := Parse(f)
+	return ws, warnings, nil
 }

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Worksheet Parser</title>
+<meta name="description" content="Write a worksheet in plain text, get an interactive and a printable HTML version. Runs entirely in your browser.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234F46E5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 2v6h6M9 15l2 2 4-4'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="bar">
+  <h1>
+    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg>
+    Worksheet Parser
+  </h1>
+  <nav class="actions" aria-label="File">
+    <label class="btn">Open…<input type="file" id="open" accept=".txt,.wsp,text/plain" hidden></label>
+    <button class="btn" id="example">Example</button>
+    <button class="btn" id="save-src">Save text</button>
+    <button class="btn" id="help-btn" aria-haspopup="dialog">Format help</button>
+    <a class="btn ghost" href="https://github.com/bugracdnc/worksheetparser">Source</a>
+  </nav>
+</header>
+
+<main>
+  <section class="pane editor" aria-label="Worksheet source">
+    <label for="src" class="pane-title">Worksheet text <span id="count" class="muted"></span></label>
+    <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+    <div id="warnings" role="status" aria-live="polite"></div>
+  </section>
+
+  <section class="pane preview" aria-label="Preview">
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tab-interactive" aria-selected="true">Interactive</button>
+      <button role="tab" id="tab-printable" aria-selected="false">Printable</button>
+      <span class="spacer"></span>
+      <button class="btn primary" id="download">Download HTML</button>
+      <button class="btn" id="print">Print</button>
+    </div>
+    <div class="frame-wrap">
+      <p id="loading" class="muted">Loading…</p>
+      <iframe id="frame" title="Worksheet preview" sandbox="allow-scripts allow-modals"></iframe>
+      <iframe id="print-frame" title="Print" hidden></iframe>
+    </div>
+  </section>
+</main>
+
+<dialog id="help">
+  <h2>Format</h2>
+  <p>One setting per line as <code>@key: value</code>. Lines starting with <code>#</code> are comments.</p>
+<pre>@title: Present Simple
+@instructions: Choose the correct answer.
+
+# multiple_choice: radio buttons
+@type: multiple_choice
+@question: He _____ his homework.
+@options: do, does, doing
+@correct: does
+
+# dropdown: a select box
+@type: dropdown
+@question: She _____ a student.
+@options: is, are, am
+@correct: is
+
+# fill_blank: free text, checked case-insensitively
+@type: fill_blank
+@question: They _____ to school by bus.
+@correct: go</pre>
+  <p><code>@correct</code> closes a question. Options are separated by commas.</p>
+  <form method="dialog"><button class="btn primary">Close</button></form>
+</dialog>
+
+<script src="wasm_exec.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

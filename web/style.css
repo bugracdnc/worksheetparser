@@ -1,0 +1,146 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --fg: #0f172a;
+  --muted: #475569;
+  --border: #e2e8f0;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --on-primary: #ffffff;
+  --warn-bg: #fef3c7;
+  --warn-fg: #78350f;
+  --ok-fg: #047857;
+  --ring: #4f46e5;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1120;
+    --card: #111827;
+    --fg: #e5e7eb;
+    --muted: #94a3b8;
+    --border: #1f2937;
+    --primary: #6366f1;
+    --primary-hover: #818cf8;
+    --warn-bg: #422006;
+    --warn-fg: #fde68a;
+    --ok-fg: #34d399;
+    --ring: #818cf8;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.muted { color: var(--muted); font-weight: 400; }
+code { font-family: ui-monospace, "Cascadia Code", Menlo, monospace; font-size: .9em; }
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+}
+.bar h1 { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 1.125rem; }
+.bar h1 svg { width: 24px; height: 24px; fill: none; stroke: var(--primary); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.actions { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--fg);
+  font: inherit;
+  font-size: .9375rem;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .15s, border-color .15s;
+}
+.btn:hover { border-color: var(--primary); }
+.btn.primary { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.btn.primary:hover { background: var(--primary-hover); }
+.btn.ghost { border-color: transparent; }
+
+main {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+}
+.pane { display: flex; flex-direction: column; min-height: 0; }
+.editor { border-right: 1px solid var(--border); }
+.pane-title { padding: 10px 16px; font-weight: 600; font-size: .9375rem; }
+
+textarea {
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  padding: 12px 16px;
+  border: 0;
+  border-top: 1px solid var(--border);
+  resize: none;
+  background: var(--card);
+  color: var(--fg);
+  font: 14px/1.6 ui-monospace, "Cascadia Code", Menlo, monospace;
+  tab-size: 2;
+}
+textarea:focus-visible { outline-offset: -2px; }
+
+#warnings { max-height: 30%; overflow: auto; border-top: 1px solid var(--border); }
+#warnings ul { margin: 0; padding: 8px 16px 8px 32px; background: var(--warn-bg); color: var(--warn-fg); font-size: .875rem; }
+#warnings p { margin: 0; padding: 8px 16px; color: var(--ok-fg); font-size: .875rem; }
+
+.tabs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 6px 16px; border-bottom: 1px solid var(--border); }
+.tabs [role="tab"] {
+  min-height: 40px;
+  padding: 0 12px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.tabs [role="tab"][aria-selected="true"] { color: var(--fg); border-bottom-color: var(--primary); }
+.spacer { flex: 1; }
+
+.frame-wrap { position: relative; flex: 1; min-height: 0; }
+#loading { position: absolute; inset: 0; margin: 0; padding: 16px; }
+#frame { width: 100%; height: 100%; border: 0; background: #fff; }
+
+dialog {
+  max-width: min(560px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--fg);
+}
+dialog::backdrop { background: rgb(0 0 0 / .4); }
+dialog h2 { margin-top: 0; }
+dialog pre { overflow: auto; padding: 12px; border-radius: 8px; background: var(--bg); font-size: 13px; }
+
+@media (max-width: 800px) {
+  main { grid-template-columns: 1fr; grid-template-rows: 45vh 70vh; }
+  body { height: auto; }
+  .editor { border-right: 0; border-bottom: 1px solid var(--border); }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

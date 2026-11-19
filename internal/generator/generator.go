@@ -5,7 +5,7 @@ import (
 	"html/template"
 	"io"
 
-	"worksheetparser/internal/models"
+	"github.com/bugracdnc/worksheetparser/internal/models"
 )
 
 //go:embed templates/*.gohtml
