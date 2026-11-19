@@ -1,0 +1,160 @@
+@title: SMART CHOICE 3 - FINAL EXAM (Units 7-12)
+@instructions: Read the questions carefully and select the correct option.
+
+# --- VOCABULARY SECTION ---
+
+# Question 1
+@type: multiple_choice
+@question: I can’t read the menu clearly. I think I need to see an ______ to get my eyes checked.
+@options: architect, optometrist, engineer, hairstylist
+@correct: optometrist
+
+# Question 2
+@type: multiple_choice
+@question: Look at those dark clouds! There is going to be a ______ soon.
+@options: drought, storm, heatwave, cliff
+@correct: storm
+
+# Question 3
+@type: multiple_choice
+@question: The story about the aliens was just a ______. It wasn't real.
+@options: proof, witness, hoax, evidence
+@correct: hoax
+
+# Question 4
+@type: multiple_choice
+@question: If you want to change the color of your hair, you should ______ it.
+@options: shave, perm, dye, straighten
+@correct: dye
+
+# Question 5
+@type: multiple_choice
+@question: A ______ is a deep valley with very steep sides, often with a river flowing through it.
+@options: canyon, coast, glacier, desert
+@correct: canyon
+
+# Question 6
+@type: multiple_choice
+@question: The police are looking for more ______ to solve the crime.
+@options: mystery, evidence, theory, ghost
+@correct: evidence
+
+# Question 7
+@type: multiple_choice
+@question: I was so ______ when I fell down in front of everyone.
+@options: relieved, thrilled, embarrassed, suspicious
+@correct: embarrassed
+
+# Question 8
+@type: multiple_choice
+@question: Scientists say that global warming is causing the ice in the ______ to melt.
+@options: jungles, glaciers, dunes, caves
+@correct: glaciers
+
+# --- GRAMMAR SECTION ---
+
+# Question 9
+@type: multiple_choice
+@question: (Causative) I didn't repair the roof myself. I ______ by a professional.
+@options: had repaired it, had it repaired, got it repair, repaired it
+@correct: had it repaired
+
+# Question 10
+@type: multiple_choice
+@question: (Causative) "Your hair looks different." "Yes, I ______ yesterday."
+@options: cut it, have cut it, had it cut, got it to cut
+@correct: had it cut
+
+# Question 11
+@type: multiple_choice
+@question: (Modals of Deduction) The lights are off and the car is gone. They ______ be home.
+@options: must, can't, might, should
+@correct: can't
+
+# Question 12
+@type: multiple_choice
+@question: (Modals of Deduction - Past) She passed the exam with 100 points. She ______ studied very hard.
+@options: must have, can't have, should have, wouldn't have
+@correct: must have
+
+# Question 13
+@type: multiple_choice
+@question: (Reported Speech) "I am busy now," said Tom. Tom said that he ______ busy then.
+@options: is, was, will be, has been
+@correct: was
+
+# Question 14
+@type: multiple_choice
+@question: (Reported Speech) "Where do you live?" asked Mary. Mary asked me where ______ .
+@options: do I live, did I live, I lived, I live
+@correct: I lived
+
+# Question 15
+@type: multiple_choice
+@question: (Second Conditional) If I ______ a million dollars, I would travel the world.
+@options: have, am, had, would have
+@correct: had
+
+# Question 16
+@type: multiple_choice
+@question: (Second Conditional) What ______ you do if you saw a ghost?
+@options: will, would, did, do
+@correct: would
+
+# Question 17
+@type: multiple_choice
+@question: (Passive Voice) English ______ in many countries around the world.
+@options: speaks, is speaking, is spoken, spoke
+@correct: is spoken
+
+# Question 18
+@type: multiple_choice
+@question: (Passive Voice) The Pyramids ______ by the ancient Egyptians thousands of years ago.
+@options: built, were built, are built, have been built
+@correct: were built
+
+# Question 19
+@type: multiple_choice
+@question: (Future Forms) Look at that car! It’s going too fast. It ______ crash!
+@options: is going to, will, might, won't
+@correct: is going to
+
+# Question 20
+@type: multiple_choice
+@question: (Tag Questions) You haven't seen my phone, ______?
+@options: did you, haven't you, have you, do you
+@correct: have you
+
+# --- READING SECTION ---
+
+# Question 21
+@type: multiple_choice
+@question: READ THE TEXT: "The Mary Celeste was an American merchant ship discovered in the Atlantic Ocean in 1872. When it was found, the ship was in good condition and still under sail, but there was nobody on board. The captain, his family, and the crew had disappeared. Their personal belongings and the cargo were still on the ship. The lifeboat was missing. Some people believe they must have abandoned the ship because they thought it was sinking. Others think pirates might have attacked them, but there was no sign of a fight. To this day, nobody knows exactly what happened." --- QUESTION: Why is the Mary Celeste considered a mystery?
+@options: Because it sank in the Atlantic Ocean., Because the crew disappeared without a clear reason., Because pirates stole the cargo., Because the ship was broken.
+@correct: Because the crew disappeared without a clear reason.
+
+# Question 22
+@type: multiple_choice
+@question: According to the text, what was missing from the ship?
+@options: The cargo, The personal belongings, The sails, The lifeboat
+@correct: The lifeboat
+
+# Question 23
+@type: multiple_choice
+@question: What is one theory mentioned about the crew's disappearance?
+@options: They were taken by aliens., They jumped into the water to swim., They might have been attacked by pirates., The captain killed everyone.
+@correct: They might have been attacked by pirates.
+
+# --- DIALOGUE SECTION ---
+
+# Question 24
+@type: multiple_choice
+@question: A: "I have a terrible toothache." B: "You ______ see a dentist immediately."
+@options: would, should, might, won't
+@correct: should
+
+# Question 25
+@type: multiple_choice
+@question: A: "Did you hear that Sam won the lottery?" B: "No way! You ______ be joking!"
+@options: can't, must, might, should
+@correct: can't

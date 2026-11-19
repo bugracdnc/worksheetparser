@@ -1,0 +1,244 @@
+@title: İngilizce Dil Eğitimi Karma Sınavı (Units 8-11)
+@instructions: Read the questions carefully and select the correct option.
+
+# --- MULTIPLE CHOICE SECTION ---
+
+# Question 1
+@type: multiple_choice
+@question: I’m very tired. What do you think I should do? ~ I think you ______ to bed early tonight.
+@options: should to go, should going, should go, ought go, shouldn't go
+@correct: should go
+
+# Question 2
+@type: multiple_choice
+@question: If we ______ a garden, we ______ a dog, but we live in a small flat.
+@options: have / would get, had / would get, had / will get, have / will get, had / would getting
+@correct: had / would get
+
+# Question 3
+@type: multiple_choice
+@question: In basketball, players score points by throwing the ball ______ a hoop.
+@options: over, past, along, through, up
+@correct: through
+
+# Question 4
+@type: multiple_choice
+@question: When I was at primary school, I ______ like history, but now I love it.
+@options: used to, use to, didn't used to, didn't use to, wasn't used to
+@correct: didn't use to
+
+# Question 5
+@type: multiple_choice
+@question: If I ______ the bus, I ______ late for the meeting.
+@options: miss / will be, will miss / am, miss / would be, misses / will be, missed / will be
+@correct: miss / will be
+
+# Question 6
+@type: multiple_choice
+@question: Julia has suffered from a phobia of spiders ______ she was twelve years old.
+@options: for, during, since, ago, before
+@correct: since
+
+# Question 7
+@type: multiple_choice
+@question: I need to ______ about hotels in Madrid for my next holiday.
+@options: look up, find out, set off, give up, turn down
+@correct: find out
+
+# Question 8
+@type: multiple_choice
+@question: I’m not sure about my plans. I ______ to the cinema tonight, or I might stay home.
+@options: must go, will go, might go, might to go, going
+@correct: might go
+
+# Question 9
+@type: multiple_choice
+@question: "Is this your book?" "No, it's not ______; it's hers."
+@options: my, mine, the mine, me, mines
+@correct: mine
+
+# Question 10
+@type: multiple_choice
+@question: Janet Leigh ______ in the film Psycho in 1960.
+@options: starred, has starred, was star, stars, is starring
+@correct: starred
+
+# Question 11
+@type: multiple_choice
+@question: Millions of Lego pieces ______ in this factory every year.
+@options: produced, were produced, are produce, is produced, are produced
+@correct: are produced
+
+# Question 12
+@type: multiple_choice
+@question: "I love watching tennis." "______ do I."
+@options: So, Neither, Too, Also, Either
+@correct: So
+
+# Question 13
+@type: multiple_choice
+@question: I ______ lost on my way to the interview yesterday because I didn't have a map.
+@options: got, became, arrived, was, went
+@correct: got
+
+# Question 14
+@type: multiple_choice
+@question: To reach the station, go straight on and take the ______ left.
+@options: next, once, first, street, corner
+@correct: first
+
+# Question 15
+@type: multiple_choice
+@question: "Do you want to ______ cycling?" "Sure, that sound's fun!"
+@options: play, do, make, go, practice
+@correct: go
+
+# Question 16
+@type: multiple_choice
+@question: "We have ______ class today." "Oh no! I've forgotten my calculator!"
+@options: History, Geography, Maths, Literature, IT
+@correct: Maths
+
+# Question 17
+@type: multiple_choice
+@question: Don't forget to ______ your dictionary to the next class.
+@options: carry, wear, bring, take, win
+@correct: bring
+
+# Question 18
+@type: multiple_choice
+@question: Which of the following is a "farm animal"?
+@options: Lion, Bear, Shark, Goat, Kangaroo
+@correct: Goat
+
+# Question 19
+@type: multiple_choice
+@question: There is a wet towel on the floor. Please _________________.
+@options: pick up it, pick it, pick it up, pick up, picking it up
+@correct: pick it up
+
+# Question 20
+@type: multiple_choice
+@question: "Have you made your ______ yet?" "No! I can't decide!"
+@options: decider, deciding, decisional, decision, decisiveness
+@correct: decision
+
+# Question 21
+@type: multiple_choice
+@question: She walked into the room and sat down ______.
+@options: quiet, quietly, more quiet, quietest, quieted
+@correct: quietly
+
+# Question 22
+@type: multiple_choice
+@question: They have lived in this town ______ a very long time.
+@options: since, during, until, for, ago
+@correct: for
+
+# Question 23
+@type: multiple_choice
+@question: The saxophone ______ by a Belgian musician named Adolphe Sax.
+@options: invented, was invent, were invented, is invented, was invented
+@correct: was invented
+
+# Question 24
+@type: multiple_choice
+@question: Maggie’s lookalike looks very ______ to her, but they aren't identical.
+@options: same, similar, different, like, as
+@correct: similar
+
+# Question 25
+@type: multiple_choice
+@question: You ______ be so hard on him; he is only twenty-five.
+@options: shouldn't, should, don't should, ought, shouldn't to
+@correct: shouldn't
+
+# Question 26
+@type: multiple_choice
+@question: Duncan Jones ______ many successful films since he started his career.
+@options: directed, has directed, directs, was direct, is directing
+@correct: has directed
+
+# Question 27
+@type: multiple_choice
+@question: The golf ball rolled across the green and went ______ the hole.
+@options: through, over, into, past, along
+@correct: into
+
+# Question 28
+@type: multiple_choice
+@question: Did you ______ wear a uniform at your secondary school?
+@options: used to, use to, using to, usually, used
+@correct: use to
+
+# Question 29
+@type: multiple_choice
+@question: If you ______ carefully, you ______ everything.
+@options: listen / 'll understand, will listen / understand, listens / 'll understand, listen / understand, listened / 'll understand
+@correct: listen / 'll understand
+
+# Question 30
+@type: multiple_choice
+@question: Turn right ______ the traffic lights to find the restaurant.
+@options: in, at, on, to, into
+@correct: at
+
+# Question 31
+@type: multiple_choice
+@question: My alarm ______ at six o'clock every morning.
+@options: sets off, goes off, gives up, looks after, finds out
+@correct: goes off
+
+# Question 32
+@type: multiple_choice
+@question: There was a lot of ______ because nobody knew where to go.
+@options: confuse, confusing, confused, confusion, confusions
+@correct: confusion
+
+# Question 33
+@type: multiple_choice
+@question: Hartley's wife told him: "Vivienne is coming to be ______ cook!"
+@options: our, ours, us, we, our's
+@correct: our
+
+# Question 34
+@type: multiple_choice
+@question: I ______ cycle to work if the traffic wasn't so bad.
+@options: will, would, can, am, would to
+@correct: would
+
+# Question 35
+@type: multiple_choice
+@question: "Where are they from?" "They are ______."
+@options: the Japan, Japan, Japanese, Japanish, the Japanese
+@correct: Japanese
+
+# Question 36
+@type: multiple_choice
+@question: "I don't do any exercise at all." "Neither ______ I."
+@options: am, do, did, have, can
+@correct: do
+
+# Question 37
+@type: multiple_choice
+@question: I ______ very nervous before the exam started.
+@options: got, getted, was gotten, had, made
+@correct: got
+
+# Question 38
+@type: multiple_choice
+@question: How long ______ you ______ afraid of flying?
+@options: are / been, did / have, have / been, has / been, were / being
+@correct: have / been
+
+# Question 39
+@type: multiple_choice
+@question: We ______ for the airport at six thirty in the morning.
+@options: set off, gave up, put on, took off, looked after
+@correct: set off
+
+# Question 40
+@type: multiple_choice
+@question: If you don't remind him, he ____________.
+@options: mights forget, might forgets, might be forgetting, mights forgot, might forget
+@correct: might forget

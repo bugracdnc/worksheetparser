@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İngilizce Dil Eğitimi Karma Sınavı (Units 8-11)</title>
+    <style>
+    :root {
+        --bg-color: #f3f4f6;
+        --card-bg: #ffffff;
+        --primary: #4F46E5;
+        --primary-hover: #4338ca;
+        --success-bg: #dcfce7;
+        --success-border: #16a34a;
+        --error-bg: #fee2e2;
+        --error-border: #dc2626;
+        --text: #1f2937;
+    }
+
+    body { 
+        font-family: 'Segoe UI', system-ui, sans-serif; 
+        background-color: var(--bg-color);
+        color: var(--text);
+        margin: 0;
+        padding: 20px;
+        counter-reset: q-counter;
+    }
+
+    .container { max-width: 650px; margin: 0 auto; padding-bottom: 50px; }
+
+    h1 { text-align: center; color: #111; margin-bottom: 0.5rem; }
+    p.desc { text-align: center; color: #555; margin-bottom: 2rem; }
+
+     
+    .question-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+
+    .q-text { font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem; }
+    .q-text::before {
+        counter-increment: q-counter;
+        content: counter(q-counter) ". ";
+        color: var(--primary);
+    }
+
+     
+    label.option {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        margin: 8px 0;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+    label.option:hover { background: #f9fafb; }
+    input[type="radio"] { margin-right: 12px; transform: scale(1.2); accent-color: var(--primary); }
+
+     
+    .input-group {
+        display: flex;
+        gap: 10px;
+    }
+    
+    select, input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 1rem;
+        box-sizing: border-box; 
+    }
+    
+    .check-btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 0 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+    .check-btn:hover { background: var(--primary-hover); }
+
+     
+    .question-card.correct { border-color: var(--success-border); background-color: var(--success-bg); }
+    .question-card.incorrect { border-color: var(--error-border); background-color: var(--error-bg); }
+
+     
+    .question-card.correct label.option:has(input:checked) { 
+        background-color: #86efac; border-color: var(--success-border); font-weight: bold;
+    }
+    .question-card.incorrect label.option:has(input:checked) { 
+        background-color: #fca5a5; border-color: var(--error-border);
+    }
+
+    .feedback-msg {
+        margin-top: 10px;
+        font-size: 0.95rem;
+        font-weight: bold;
+        display: none;
+    }
+    .correct .feedback-msg { display: block; color: var(--success-border); }
+    .incorrect .feedback-msg { display: block; color: var(--error-border); }
+
+    .reset-container { text-align: center; margin-top: 40px; }
+    .btn-reset { 
+        background: #4b5563; color: white; padding: 10px 20px; 
+        border: none; border-radius: 8px; cursor: pointer; font-size: 1rem;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>İngilizce Dil Eğitimi Karma Sınavı (Units 8-11)</h1>
+    <p class="desc">Read the questions carefully and select the correct option.</p>
+
+    <div id="quiz-container">
+        
+        <div class="question-card" id="card-0" data-correct="should go" data-type="multiple_choice">
+            <div class="q-text">I’m very tired. What do you think I should do? ~ I think you ______ to bed early tonight.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-0" value="should to go" onclick="validateCard( 0 )" />
+                        <span>should to go</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-0" value="should going" onclick="validateCard( 0 )" />
+                        <span>should going</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-0" value="should go" onclick="validateCard( 0 )" />
+                        <span>should go</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-0" value="ought go" onclick="validateCard( 0 )" />
+                        <span>ought go</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-0" value="shouldn&#39;t go" onclick="validateCard( 0 )" />
+                        <span>shouldn&#39;t go</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-0"></div>
+        </div>
+        
+        <div class="question-card" id="card-1" data-correct="had / would get" data-type="multiple_choice">
+            <div class="q-text">If we ______ a garden, we ______ a dog, but we live in a small flat.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-1" value="have / would get" onclick="validateCard( 1 )" />
+                        <span>have / would get</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-1" value="had / would get" onclick="validateCard( 1 )" />
+                        <span>had / would get</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-1" value="had / will get" onclick="validateCard( 1 )" />
+                        <span>had / will get</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-1" value="have / will get" onclick="validateCard( 1 )" />
+                        <span>have / will get</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-1" value="had / would getting" onclick="validateCard( 1 )" />
+                        <span>had / would getting</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-1"></div>
+        </div>
+        
+        <div class="question-card" id="card-2" data-correct="through" data-type="multiple_choice">
+            <div class="q-text">In basketball, players score points by throwing the ball ______ a hoop.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-2" value="over" onclick="validateCard( 2 )" />
+                        <span>over</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-2" value="past" onclick="validateCard( 2 )" />
+                        <span>past</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-2" value="along" onclick="validateCard( 2 )" />
+                        <span>along</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-2" value="through" onclick="validateCard( 2 )" />
+                        <span>through</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-2" value="up" onclick="validateCard( 2 )" />
+                        <span>up</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-2"></div>
+        </div>
+        
+        <div class="question-card" id="card-3" data-correct="didn&#39;t use to" data-type="multiple_choice">
+            <div class="q-text">When I was at primary school, I ______ like history, but now I love it.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-3" value="used to" onclick="validateCard( 3 )" />
+                        <span>used to</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-3" value="use to" onclick="validateCard( 3 )" />
+                        <span>use to</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-3" value="didn&#39;t used to" onclick="validateCard( 3 )" />
+                        <span>didn&#39;t used to</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-3" value="didn&#39;t use to" onclick="validateCard( 3 )" />
+                        <span>didn&#39;t use to</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-3" value="wasn&#39;t used to" onclick="validateCard( 3 )" />
+                        <span>wasn&#39;t used to</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-3"></div>
+        </div>
+        
+        <div class="question-card" id="card-4" data-correct="miss / will be" data-type="multiple_choice">
+            <div class="q-text">If I ______ the bus, I ______ late for the meeting.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-4" value="miss / will be" onclick="validateCard( 4 )" />
+                        <span>miss / will be</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-4" value="will miss / am" onclick="validateCard( 4 )" />
+                        <span>will miss / am</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-4" value="miss / would be" onclick="validateCard( 4 )" />
+                        <span>miss / would be</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-4" value="misses / will be" onclick="validateCard( 4 )" />
+                        <span>misses / will be</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-4" value="missed / will be" onclick="validateCard( 4 )" />
+                        <span>missed / will be</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-4"></div>
+        </div>
+        
+        <div class="question-card" id="card-5" data-correct="since" data-type="multiple_choice">
+            <div class="q-text">Julia has suffered from a phobia of spiders ______ she was twelve years old.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-5" value="for" onclick="validateCard( 5 )" />
+                        <span>for</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-5" value="during" onclick="validateCard( 5 )" />
+                        <span>during</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-5" value="since" onclick="validateCard( 5 )" />
+                        <span>since</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-5" value="ago" onclick="validateCard( 5 )" />
+                        <span>ago</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-5" value="before" onclick="validateCard( 5 )" />
+                        <span>before</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-5"></div>
+        </div>
+        
+        <div class="question-card" id="card-6" data-correct="find out" data-type="multiple_choice">
+            <div class="q-text">I need to ______ about hotels in Madrid for my next holiday.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-6" value="look up" onclick="validateCard( 6 )" />
+                        <span>look up</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-6" value="find out" onclick="validateCard( 6 )" />
+                        <span>find out</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-6" value="set off" onclick="validateCard( 6 )" />
+                        <span>set off</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-6" value="give up" onclick="validateCard( 6 )" />
+                        <span>give up</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-6" value="turn down" onclick="validateCard( 6 )" />
+                        <span>turn down</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-6"></div>
+        </div>
+        
+        <div class="question-card" id="card-7" data-correct="might go" data-type="multiple_choice">
+            <div class="q-text">I’m not sure about my plans. I ______ to the cinema tonight, or I might stay home.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-7" value="must go" onclick="validateCard( 7 )" />
+                        <span>must go</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-7" value="will go" onclick="validateCard( 7 )" />
+                        <span>will go</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-7" value="might go" onclick="validateCard( 7 )" />
+                        <span>might go</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-7" value="might to go" onclick="validateCard( 7 )" />
+                        <span>might to go</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-7" value="going" onclick="validateCard( 7 )" />
+                        <span>going</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-7"></div>
+        </div>
+        
+        <div class="question-card" id="card-8" data-correct="mine" data-type="multiple_choice">
+            <div class="q-text">&#34;Is this your book?&#34; &#34;No, it&#39;s not ______; it&#39;s hers.&#34;</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-8" value="my" onclick="validateCard( 8 )" />
+                        <span>my</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-8" value="mine" onclick="validateCard( 8 )" />
+                        <span>mine</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-8" value="the mine" onclick="validateCard( 8 )" />
+                        <span>the mine</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-8" value="me" onclick="validateCard( 8 )" />
+                        <span>me</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-8" value="mines" onclick="validateCard( 8 )" />
+                        <span>mines</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-8"></div>
+        </div>
+        
+        <div class="question-card" id="card-9" data-correct="starred" data-type="multiple_choice">
+            <div class="q-text">Janet Leigh ______ in the film Psycho in 1960.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-9" value="starred" onclick="validateCard( 9 )" />
+                        <span>starred</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-9" value="has starred" onclick="validateCard( 9 )" />
+                        <span>has starred</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-9" value="was star" onclick="validateCard( 9 )" />
+                        <span>was star</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-9" value="stars" onclick="validateCard( 9 )" />
+                        <span>stars</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-9" value="is starring" onclick="validateCard( 9 )" />
+                        <span>is starring</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-9"></div>
+        </div>
+        
+        <div class="question-card" id="card-10" data-correct="are produced" data-type="multiple_choice">
+            <div class="q-text">Millions of Lego pieces ______ in this factory every year.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-10" value="produced" onclick="validateCard( 10 )" />
+                        <span>produced</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-10" value="were produced" onclick="validateCard( 10 )" />
+                        <span>were produced</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-10" value="are produce" onclick="validateCard( 10 )" />
+                        <span>are produce</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-10" value="is produced" onclick="validateCard( 10 )" />
+                        <span>is produced</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-10" value="are produced" onclick="validateCard( 10 )" />
+                        <span>are produced</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-10"></div>
+        </div>
+        
+        <div class="question-card" id="card-11" data-correct="So" data-type="multiple_choice">
+            <div class="q-text">&#34;I love watching tennis.&#34; &#34;______ do I.&#34;</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-11" value="So" onclick="validateCard( 11 )" />
+                        <span>So</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-11" value="Neither" onclick="validateCard( 11 )" />
+                        <span>Neither</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-11" value="Too" onclick="validateCard( 11 )" />
+                        <span>Too</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-11" value="Also" onclick="validateCard( 11 )" />
+                        <span>Also</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-11" value="Either" onclick="validateCard( 11 )" />
+                        <span>Either</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-11"></div>
+        </div>
+        
+        <div class="question-card" id="card-12" data-correct="got" data-type="multiple_choice">
+            <div class="q-text">I ______ lost on my way to the interview yesterday because I didn&#39;t have a map.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-12" value="got" onclick="validateCard( 12 )" />
+                        <span>got</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-12" value="became" onclick="validateCard( 12 )" />
+                        <span>became</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-12" value="arrived" onclick="validateCard( 12 )" />
+                        <span>arrived</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-12" value="was" onclick="validateCard( 12 )" />
+                        <span>was</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-12" value="went" onclick="validateCard( 12 )" />
+                        <span>went</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-12"></div>
+        </div>
+        
+        <div class="question-card" id="card-13" data-correct="first" data-type="multiple_choice">
+            <div class="q-text">To reach the station, go straight on and take the ______ left.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-13" value="next" onclick="validateCard( 13 )" />
+                        <span>next</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-13" value="once" onclick="validateCard( 13 )" />
+                        <span>once</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-13" value="first" onclick="validateCard( 13 )" />
+                        <span>first</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-13" value="street" onclick="validateCard( 13 )" />
+                        <span>street</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-13" value="corner" onclick="validateCard( 13 )" />
+                        <span>corner</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-13"></div>
+        </div>
+        
+        <div class="question-card" id="card-14" data-correct="go" data-type="multiple_choice">
+            <div class="q-text">&#34;Do you want to ______ cycling?&#34; &#34;Sure, that sound&#39;s fun!&#34;</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-14" value="play" onclick="validateCard( 14 )" />
+                        <span>play</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-14" value="do" onclick="validateCard( 14 )" />
+                        <span>do</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-14" value="make" onclick="validateCard( 14 )" />
+                        <span>make</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-14" value="go" onclick="validateCard( 14 )" />
+                        <span>go</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-14" value="practice" onclick="validateCard( 14 )" />
+                        <span>practice</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-14"></div>
+        </div>
+        
+        <div class="question-card" id="card-15" data-correct="Maths" data-type="multiple_choice">
+            <div class="q-text">&#34;We have ______ class today.&#34; &#34;Oh no! I&#39;ve forgotten my calculator!&#34;</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-15" value="History" onclick="validateCard( 15 )" />
+                        <span>History</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-15" value="Geography" onclick="validateCard( 15 )" />
+                        <span>Geography</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-15" value="Maths" onclick="validateCard( 15 )" />
+                        <span>Maths</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-15" value="Literature" onclick="validateCard( 15 )" />
+                        <span>Literature</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-15" value="IT" onclick="validateCard( 15 )" />
+                        <span>IT</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-15"></div>
+        </div>
+        
+        <div class="question-card" id="card-16" data-correct="bring" data-type="multiple_choice">
+            <div class="q-text">Don&#39;t forget to ______ your dictionary to the next class.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-16" value="carry" onclick="validateCard( 16 )" />
+                        <span>carry</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-16" value="wear" onclick="validateCard( 16 )" />
+                        <span>wear</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-16" value="bring" onclick="validateCard( 16 )" />
+                        <span>bring</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-16" value="take" onclick="validateCard( 16 )" />
+                        <span>take</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-16" value="win" onclick="validateCard( 16 )" />
+                        <span>win</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-16"></div>
+        </div>
+        
+        <div class="question-card" id="card-17" data-correct="Goat" data-type="multiple_choice">
+            <div class="q-text">Which of the following is a &#34;farm animal&#34;?</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-17" value="Lion" onclick="validateCard( 17 )" />
+                        <span>Lion</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-17" value="Bear" onclick="validateCard( 17 )" />
+                        <span>Bear</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-17" value="Shark" onclick="validateCard( 17 )" />
+                        <span>Shark</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-17" value="Goat" onclick="validateCard( 17 )" />
+                        <span>Goat</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-17" value="Kangaroo" onclick="validateCard( 17 )" />
+                        <span>Kangaroo</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-17"></div>
+        </div>
+        
+        <div class="question-card" id="card-18" data-correct="pick it up" data-type="multiple_choice">
+            <div class="q-text">There is a wet towel on the floor. Please _________________.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-18" value="pick up it" onclick="validateCard( 18 )" />
+                        <span>pick up it</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-18" value="pick it" onclick="validateCard( 18 )" />
+                        <span>pick it</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-18" value="pick it up" onclick="validateCard( 18 )" />
+                        <span>pick it up</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-18" value="pick up" onclick="validateCard( 18 )" />
+                        <span>pick up</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-18" value="picking it up" onclick="validateCard( 18 )" />
+                        <span>picking it up</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-18"></div>
+        </div>
+        
+        <div class="question-card" id="card-19" data-correct="decision" data-type="multiple_choice">
+            <div class="q-text">&#34;Have you made your ______ yet?&#34; &#34;No! I can&#39;t decide!&#34;</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-19" value="decider" onclick="validateCard( 19 )" />
+                        <span>decider</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-19" value="deciding" onclick="validateCard( 19 )" />
+                        <span>deciding</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-19" value="decisional" onclick="validateCard( 19 )" />
+                        <span>decisional</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-19" value="decision" onclick="validateCard( 19 )" />
+                        <span>decision</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-19" value="decisiveness" onclick="validateCard( 19 )" />
+                        <span>decisiveness</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-19"></div>
+        </div>
+        
+        <div class="question-card" id="card-20" data-correct="quietly" data-type="multiple_choice">
+            <div class="q-text">She walked into the room and sat down ______.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-20" value="quiet" onclick="validateCard( 20 )" />
+                        <span>quiet</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-20" value="quietly" onclick="validateCard( 20 )" />
+                        <span>quietly</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-20" value="more quiet" onclick="validateCard( 20 )" />
+                        <span>more quiet</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-20" value="quietest" onclick="validateCard( 20 )" />
+                        <span>quietest</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-20" value="quieted" onclick="validateCard( 20 )" />
+                        <span>quieted</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-20"></div>
+        </div>
+        
+        <div class="question-card" id="card-21" data-correct="for" data-type="multiple_choice">
+            <div class="q-text">They have lived in this town ______ a very long time.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-21" value="since" onclick="validateCard( 21 )" />
+                        <span>since</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-21" value="during" onclick="validateCard( 21 )" />
+                        <span>during</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-21" value="until" onclick="validateCard( 21 )" />
+                        <span>until</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-21" value="for" onclick="validateCard( 21 )" />
+                        <span>for</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-21" value="ago" onclick="validateCard( 21 )" />
+                        <span>ago</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-21"></div>
+        </div>
+        
+        <div class="question-card" id="card-22" data-correct="was invented" data-type="multiple_choice">
+            <div class="q-text">The saxophone ______ by a Belgian musician named Adolphe Sax.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-22" value="invented" onclick="validateCard( 22 )" />
+                        <span>invented</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-22" value="was invent" onclick="validateCard( 22 )" />
+                        <span>was invent</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-22" value="were invented" onclick="validateCard( 22 )" />
+                        <span>were invented</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-22" value="is invented" onclick="validateCard( 22 )" />
+                        <span>is invented</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-22" value="was invented" onclick="validateCard( 22 )" />
+                        <span>was invented</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-22"></div>
+        </div>
+        
+        <div class="question-card" id="card-23" data-correct="similar" data-type="multiple_choice">
+            <div class="q-text">Maggie’s lookalike looks very ______ to her, but they aren&#39;t identical.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-23" value="same" onclick="validateCard( 23 )" />
+                        <span>same</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-23" value="similar" onclick="validateCard( 23 )" />
+                        <span>similar</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-23" value="different" onclick="validateCard( 23 )" />
+                        <span>different</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-23" value="like" onclick="validateCard( 23 )" />
+                        <span>like</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-23" value="as" onclick="validateCard( 23 )" />
+                        <span>as</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-23"></div>
+        </div>
+        
+        <div class="question-card" id="card-24" data-correct="shouldn&#39;t" data-type="multiple_choice">
+            <div class="q-text">You ______ be so hard on him; he is only twenty-five.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-24" value="shouldn&#39;t" onclick="validateCard( 24 )" />
+                        <span>shouldn&#39;t</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-24" value="should" onclick="validateCard( 24 )" />
+                        <span>should</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-24" value="don&#39;t should" onclick="validateCard( 24 )" />
+                        <span>don&#39;t should</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-24" value="ought" onclick="validateCard( 24 )" />
+                        <span>ought</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-24" value="shouldn&#39;t to" onclick="validateCard( 24 )" />
+                        <span>shouldn&#39;t to</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-24"></div>
+        </div>
+        
+        <div class="question-card" id="card-25" data-correct="has directed" data-type="multiple_choice">
+            <div class="q-text">Duncan Jones ______ many successful films since he started his career.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-25" value="directed" onclick="validateCard( 25 )" />
+                        <span>directed</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-25" value="has directed" onclick="validateCard( 25 )" />
+                        <span>has directed</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-25" value="directs" onclick="validateCard( 25 )" />
+                        <span>directs</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-25" value="was direct" onclick="validateCard( 25 )" />
+                        <span>was direct</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-25" value="is directing" onclick="validateCard( 25 )" />
+                        <span>is directing</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-25"></div>
+        </div>
+        
+        <div class="question-card" id="card-26" data-correct="into" data-type="multiple_choice">
+            <div class="q-text">The golf ball rolled across the green and went ______ the hole.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-26" value="through" onclick="validateCard( 26 )" />
+                        <span>through</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-26" value="over" onclick="validateCard( 26 )" />
+                        <span>over</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-26" value="into" onclick="validateCard( 26 )" />
+                        <span>into</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-26" value="past" onclick="validateCard( 26 )" />
+                        <span>past</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-26" value="along" onclick="validateCard( 26 )" />
+                        <span>along</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-26"></div>
+        </div>
+        
+        <div class="question-card" id="card-27" data-correct="use to" data-type="multiple_choice">
+            <div class="q-text">Did you ______ wear a uniform at your secondary school?</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-27" value="used to" onclick="validateCard( 27 )" />
+                        <span>used to</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-27" value="use to" onclick="validateCard( 27 )" />
+                        <span>use to</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-27" value="using to" onclick="validateCard( 27 )" />
+                        <span>using to</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-27" value="usually" onclick="validateCard( 27 )" />
+                        <span>usually</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-27" value="used" onclick="validateCard( 27 )" />
+                        <span>used</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-27"></div>
+        </div>
+        
+        <div class="question-card" id="card-28" data-correct="listen / &#39;ll understand" data-type="multiple_choice">
+            <div class="q-text">If you ______ carefully, you ______ everything.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-28" value="listen / &#39;ll understand" onclick="validateCard( 28 )" />
+                        <span>listen / &#39;ll understand</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-28" value="will listen / understand" onclick="validateCard( 28 )" />
+                        <span>will listen / understand</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-28" value="listens / &#39;ll understand" onclick="validateCard( 28 )" />
+                        <span>listens / &#39;ll understand</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-28" value="listen / understand" onclick="validateCard( 28 )" />
+                        <span>listen / understand</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-28" value="listened / &#39;ll understand" onclick="validateCard( 28 )" />
+                        <span>listened / &#39;ll understand</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-28"></div>
+        </div>
+        
+        <div class="question-card" id="card-29" data-correct="at" data-type="multiple_choice">
+            <div class="q-text">Turn right ______ the traffic lights to find the restaurant.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-29" value="in" onclick="validateCard( 29 )" />
+                        <span>in</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-29" value="at" onclick="validateCard( 29 )" />
+                        <span>at</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-29" value="on" onclick="validateCard( 29 )" />
+                        <span>on</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-29" value="to" onclick="validateCard( 29 )" />
+                        <span>to</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-29" value="into" onclick="validateCard( 29 )" />
+                        <span>into</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-29"></div>
+        </div>
+        
+        <div class="question-card" id="card-30" data-correct="goes off" data-type="multiple_choice">
+            <div class="q-text">My alarm ______ at six o&#39;clock every morning.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-30" value="sets off" onclick="validateCard( 30 )" />
+                        <span>sets off</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-30" value="goes off" onclick="validateCard( 30 )" />
+                        <span>goes off</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-30" value="gives up" onclick="validateCard( 30 )" />
+                        <span>gives up</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-30" value="looks after" onclick="validateCard( 30 )" />
+                        <span>looks after</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-30" value="finds out" onclick="validateCard( 30 )" />
+                        <span>finds out</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-30"></div>
+        </div>
+        
+        <div class="question-card" id="card-31" data-correct="confusion" data-type="multiple_choice">
+            <div class="q-text">There was a lot of ______ because nobody knew where to go.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-31" value="confuse" onclick="validateCard( 31 )" />
+                        <span>confuse</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-31" value="confusing" onclick="validateCard( 31 )" />
+                        <span>confusing</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-31" value="confused" onclick="validateCard( 31 )" />
+                        <span>confused</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-31" value="confusion" onclick="validateCard( 31 )" />
+                        <span>confusion</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-31" value="confusions" onclick="validateCard( 31 )" />
+                        <span>confusions</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-31"></div>
+        </div>
+        
+        <div class="question-card" id="card-32" data-correct="our" data-type="multiple_choice">
+            <div class="q-text">Hartley&#39;s wife told him: &#34;Vivienne is coming to be ______ cook!&#34;</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-32" value="our" onclick="validateCard( 32 )" />
+                        <span>our</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-32" value="ours" onclick="validateCard( 32 )" />
+                        <span>ours</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-32" value="us" onclick="validateCard( 32 )" />
+                        <span>us</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-32" value="we" onclick="validateCard( 32 )" />
+                        <span>we</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-32" value="our&#39;s" onclick="validateCard( 32 )" />
+                        <span>our&#39;s</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-32"></div>
+        </div>
+        
+        <div class="question-card" id="card-33" data-correct="would" data-type="multiple_choice">
+            <div class="q-text">I ______ cycle to work if the traffic wasn&#39;t so bad.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-33" value="will" onclick="validateCard( 33 )" />
+                        <span>will</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-33" value="would" onclick="validateCard( 33 )" />
+                        <span>would</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-33" value="can" onclick="validateCard( 33 )" />
+                        <span>can</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-33" value="am" onclick="validateCard( 33 )" />
+                        <span>am</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-33" value="would to" onclick="validateCard( 33 )" />
+                        <span>would to</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-33"></div>
+        </div>
+        
+        <div class="question-card" id="card-34" data-correct="Japanese" data-type="multiple_choice">
+            <div class="q-text">&#34;Where are they from?&#34; &#34;They are ______.&#34;</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-34" value="the Japan" onclick="validateCard( 34 )" />
+                        <span>the Japan</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-34" value="Japan" onclick="validateCard( 34 )" />
+                        <span>Japan</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-34" value="Japanese" onclick="validateCard( 34 )" />
+                        <span>Japanese</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-34" value="Japanish" onclick="validateCard( 34 )" />
+                        <span>Japanish</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-34" value="the Japanese" onclick="validateCard( 34 )" />
+                        <span>the Japanese</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-34"></div>
+        </div>
+        
+        <div class="question-card" id="card-35" data-correct="do" data-type="multiple_choice">
+            <div class="q-text">&#34;I don&#39;t do any exercise at all.&#34; &#34;Neither ______ I.&#34;</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-35" value="am" onclick="validateCard( 35 )" />
+                        <span>am</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-35" value="do" onclick="validateCard( 35 )" />
+                        <span>do</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-35" value="did" onclick="validateCard( 35 )" />
+                        <span>did</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-35" value="have" onclick="validateCard( 35 )" />
+                        <span>have</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-35" value="can" onclick="validateCard( 35 )" />
+                        <span>can</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-35"></div>
+        </div>
+        
+        <div class="question-card" id="card-36" data-correct="got" data-type="multiple_choice">
+            <div class="q-text">I ______ very nervous before the exam started.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-36" value="got" onclick="validateCard( 36 )" />
+                        <span>got</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-36" value="getted" onclick="validateCard( 36 )" />
+                        <span>getted</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-36" value="was gotten" onclick="validateCard( 36 )" />
+                        <span>was gotten</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-36" value="had" onclick="validateCard( 36 )" />
+                        <span>had</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-36" value="made" onclick="validateCard( 36 )" />
+                        <span>made</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-36"></div>
+        </div>
+        
+        <div class="question-card" id="card-37" data-correct="have / been" data-type="multiple_choice">
+            <div class="q-text">How long ______ you ______ afraid of flying?</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-37" value="are / been" onclick="validateCard( 37 )" />
+                        <span>are / been</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-37" value="did / have" onclick="validateCard( 37 )" />
+                        <span>did / have</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-37" value="have / been" onclick="validateCard( 37 )" />
+                        <span>have / been</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-37" value="has / been" onclick="validateCard( 37 )" />
+                        <span>has / been</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-37" value="were / being" onclick="validateCard( 37 )" />
+                        <span>were / being</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-37"></div>
+        </div>
+        
+        <div class="question-card" id="card-38" data-correct="set off" data-type="multiple_choice">
+            <div class="q-text">We ______ for the airport at six thirty in the morning.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-38" value="set off" onclick="validateCard( 38 )" />
+                        <span>set off</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-38" value="gave up" onclick="validateCard( 38 )" />
+                        <span>gave up</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-38" value="put on" onclick="validateCard( 38 )" />
+                        <span>put on</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-38" value="took off" onclick="validateCard( 38 )" />
+                        <span>took off</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-38" value="looked after" onclick="validateCard( 38 )" />
+                        <span>looked after</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-38"></div>
+        </div>
+        
+        <div class="question-card" id="card-39" data-correct="might forget" data-type="multiple_choice">
+            <div class="q-text">If you don&#39;t remind him, he ____________.</div>
+
+            
+                <div class="options-group">
+                    
+                    <label class="option">
+                        <input type="radio" name="q-39" value="mights forget" onclick="validateCard( 39 )" />
+                        <span>mights forget</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-39" value="might forgets" onclick="validateCard( 39 )" />
+                        <span>might forgets</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-39" value="might be forgetting" onclick="validateCard( 39 )" />
+                        <span>might be forgetting</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-39" value="mights forgot" onclick="validateCard( 39 )" />
+                        <span>mights forgot</span>
+                    </label>
+                    
+                    <label class="option">
+                        <input type="radio" name="q-39" value="might forget" onclick="validateCard( 39 )" />
+                        <span>might forget</span>
+                    </label>
+                    
+                </div>
+
+            
+            
+            <div class="feedback-msg" id="feedback-39"></div>
+        </div>
+        
+    </div>
+
+    <div class="reset-container">
+        <button class="btn-reset" onclick="location.reload()">Reset Worksheet</button>
+    </div>
+</div>
+
+<script>
+    
+    
+    window.addEventListener('load', function() {
+        
+        document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+        
+        
+        document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+        
+        
+        document.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
+        
+        
+        document.querySelectorAll('.question-card').forEach(card => {
+            card.classList.remove('correct', 'incorrect');
+        });
+    });
+
+    
+    function validateCard(index) {
+        const card = document.getElementById(`card-${index}`);
+        
+        
+        
+
+        const type = card.dataset.type;
+        const correctRaw = card.dataset.correct.trim();
+        const feedbackEl = document.getElementById(`feedback-${index}`);
+        
+        let userAnswer = "";
+        
+        
+        if (type === 'multiple_choice') {
+            const checked = card.querySelector('input:checked');
+            if (!checked) return; 
+            userAnswer = checked.value;
+        } else if (type === 'dropdown') {
+            const select = card.querySelector('select');
+            userAnswer = select.value;
+            if (!userAnswer) return; 
+        } else {
+            const input = document.getElementById(`input-${index}`);
+            userAnswer = input.value.trim();
+            if (!userAnswer) {
+                input.focus();
+                return; 
+            }
+        }
+
+        
+        if (userAnswer.toLowerCase() === correctRaw.toLowerCase()) {
+            
+            card.classList.remove('incorrect');
+            card.classList.add('correct');
+            feedbackEl.textContent = "Correct!";
+        } else {
+            
+            card.classList.remove('correct');
+            card.classList.add('incorrect');
+            feedbackEl.textContent = "Try again."; 
+        }
+
+        
+    }
+</script>
+
+</body>
+</html>

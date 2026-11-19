@@ -1,0 +1,154 @@
+@title: Units 9 & 10: In-Depth Practice Test
+@instructions: Read the questions carefully and select the correct option.
+
+# --- GRAMMAR & VOCABULARY SECTION ---
+
+# Question 1
+@type: multiple_choice
+@question: If we ______ a garden, we ______ a dog.
+@options: have / would get, had / will get, had / would get, have / will get, had / could getting
+@correct: had / would get
+
+# Question 2
+@type: multiple_choice
+@question: I wouldn’t buy that car if I ______ you.
+@options: am, was, be, were, would be
+@correct: were
+
+# Question 3
+@type: multiple_choice
+@question: If you ______ Indian food, I’m sure you’d like it.
+@options: try, trying, tried, would try, tries
+@correct: tried
+
+# Question 4
+@type: multiple_choice
+@question: I have had a phobia of spiders ______ I was about twelve years old.
+@options: for, during, since, ago, when
+@correct: since
+
+# Question 5
+@type: multiple_choice
+@question: They have lived in this town ______ a long time.
+@options: since, during, for, when, until
+@correct: for
+
+# Question 6
+@type: multiple_choice
+@question: Julia ______ from a fear of spiders for more than thirty years.
+@options: is suffer, suffers, has suffer, is suffering, has suffered
+@correct: has suffered
+
+# Question 7
+@type: multiple_choice
+@question: Which of these is a "wild animal" according to the vocabulary bank?
+@options: Goat, Cow, Sheep, Kangaroo, Pig
+@correct: Kangaroo
+
+# Question 8
+@type: multiple_choice
+@question: Janet Leigh ______ the famous shower scene in the film Psycho.
+@options: has filmed, films, filmed, was film, has film
+@correct: filmed
+
+# Question 9
+@type: multiple_choice
+@question: Jamie Lee Curtis ______ in many successful films since her career began.
+@options: appeared, has appeared, appears, was appear, appearing
+@correct: has appeared
+
+# Question 10
+@type: multiple_choice
+@question: "I went to the London Film School and studied to be a film director." — "So ______ I."
+@options: have, am, was, did, do
+@correct: did
+
+# Question 11
+@type: multiple_choice
+@question: To get to the restaurant, go straight on and take the ______ left.
+@options: next, once, first, street, one
+@correct: first
+
+# Question 12
+@type: multiple_choice
+@question: Turn right ______ the traffic lights to reach the subway station.
+@options: in, at, on, to, into
+@correct: at
+
+# Question 13
+@type: multiple_choice
+@question: Every morning, my neighbor preferred to ______ yoga in the garden.
+@options: play, go, do, make, practice
+@correct: do
+
+# Question 14
+@type: multiple_choice
+@question: My brother used to ______ rugby when he was at university.
+@options: play, go, do, run, hit
+@correct: play
+
+# Question 15
+@type: multiple_choice
+@question: We wanted to ______ windsurfing during our holiday last summer.
+@options: play, go, do, practice, sail
+@correct: go
+
+# Question 16
+@type: multiple_choice
+@question: In basketball, you have to throw the ball ______ a hoop.
+@options: over, towards, across, through, past
+@correct: through
+
+# Question 17
+@type: multiple_choice
+@question: The striker kicked the ball ______ the goal to win the match.
+@options: over, into, along, through, up
+@correct: into
+
+# Question 18
+@type: multiple_choice
+@question: She walked ______ the street and looked at the shop windows.
+@options: along, through, into, over, round
+@correct: along
+
+# Question 19
+@type: multiple_choice
+@question: I want to ______ chocolate because I want to be healthier.
+@options: throw away, set off, give up, look after, turn down
+@correct: give up
+
+# Question 20
+@type: multiple_choice
+@question: There is a wet towel on the floor. Please ______ up.
+@options: pick up it, pick it, pick it up, pick up, picking it up
+@correct: pick it up
+
+# Question 21
+@type: multiple_choice
+@question: My alarm ______ at six o'clock every morning.
+@options: sets off, goes off, gives up, looks after, turns up
+@correct: goes off
+
+# Question 22
+@type: multiple_choice
+@question: Guns ______ by the Chinese in the thirteenth century.
+@options: were invent, are invented, was invented, were invented, invented
+@correct: were invented
+
+# Question 23
+@type: multiple_choice
+@question: Twenty billion pieces of Lego ______ every year.
+@options: are produced, were produced, produce, is produced, produced
+@correct: are produced
+
+# Question 24
+@type: multiple_choice
+@question: Adolphe Sax was a ______ musician who invented the saxophone.
+@options: English, Belgian, Swiss, Dutch, Italian
+@correct: Belgian
+
+# Question 25
+@type: multiple_choice
+@question: The Nobel Prize ______ after Alfred Nobel, the inventor of dynamite.
+@options: is name, was name, is named, were named, named
+@correct: is named
